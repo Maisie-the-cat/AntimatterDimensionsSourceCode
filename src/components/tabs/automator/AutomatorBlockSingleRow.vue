@@ -44,6 +44,14 @@ export default {
     isErrorLine() {
       return this.lineNumber === this.errorLine;
     },
+    nestLocal: {
+      get() {
+        return this.b.nest;
+      },
+      set(value) {
+        this.b.nest = value;
+      }
+    }
   },
   created() {
     this.recalculateErrorCount();
@@ -149,7 +157,7 @@ export default {
     </div>
     <draggable
       v-if="block.nested"
-      v-model="block.nest"
+      v-model="nestLocal"
       class="l-automator-nested-block"
       group="code-blocks"
     >

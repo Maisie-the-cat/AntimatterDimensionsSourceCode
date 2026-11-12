@@ -1040,29 +1040,33 @@ export function guardFromNaNValues(obj) {
 
     if (key === "automator") continue;
 
-    let value = obj[key];
+    const value = obj[key];
     if (isObject(value)) {
       guardFromNaNValues(value);
       continue;
     }
 
     if (typeof value === "number") {
+      // eslint-disable-next-line no-loop-func
       Object.defineProperty(obj, key, {
         enumerable: true,
         configurable: true,
         get: () => value,
-        set: function guardedSetter(newValue) {
-          if (newValue === null || newValue === undefined) {
-            throw new Error("null/undefined player property assignment");
-          }
-          if (typeof newValue !== "number") {
-            throw new Error("Non-Number assignment to Number player property");
-          }
-          if (!isFinite(newValue)) {
-            throw new Error("NaN player property assignment");
-          }
-          value = newValue;
-        }
+        // eslint-disable-next-line no-loop-func
+        set: (function createSetter(/* eslint-disable-line no-unused-vars */ val) {
+          return function guardedSetter(newValue) {
+            if (newValue === null || newValue === undefined) {
+              throw new Error("null/undefined player property assignment");
+            }
+            if (typeof newValue !== "number") {
+              throw new Error("Non-Number assignment to Number player property");
+            }
+            if (!isFinite(newValue)) {
+              throw new Error("NaN player property assignment");
+            }
+            val = newValue; // eslint-disable-line no-param-reassign, no-unused-vars
+          };
+        }(value))
       });
     }
 
@@ -1071,18 +1075,21 @@ export function guardFromNaNValues(obj) {
         enumerable: true,
         configurable: true,
         get: () => value,
-        set: function guardedSetter(newValue) {
-          if (newValue === null || newValue === undefined) {
-            throw new Error("null/undefined player property assignment");
-          }
-          if (!(newValue instanceof Decimal)) {
-            throw new Error("Non-Decimal assignment to Decimal player property");
-          }
-          if (!isFinite(newValue.mantissa) || !isFinite(newValue.exponent)) {
-            throw new Error("NaN player property assignment");
-          }
-          value = newValue;
-        }
+        // eslint-disable-next-line no-loop-func
+        set: (function createSetter(/* eslint-disable-line no-unused-vars */ val) {
+          return function guardedSetter(newValue) {
+            if (newValue === null || newValue === undefined) {
+              throw new Error("null/undefined player property assignment");
+            }
+            if (!(newValue instanceof Decimal)) {
+              throw new Error("Non-Decimal assignment to Decimal player property");
+            }
+            if (!isFinite(newValue.mantissa) || !isFinite(newValue.exponent)) {
+              throw new Error("NaN player property assignment");
+            }
+            val = newValue; // eslint-disable-line no-param-reassign, no-unused-vars
+          };
+        }(value))
       });
     }
   }

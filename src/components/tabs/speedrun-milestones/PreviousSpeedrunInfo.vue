@@ -6,7 +6,7 @@ export default {
     prevRunInfo: {
       type: Object,
       required: false,
-      default: () => {}
+      default: () => ({})
     },
     index: {
       type: Number,
