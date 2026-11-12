@@ -1,15 +1,15 @@
 import TWEEN from "tween.js";
 
-import { ElectronRuntime, SteamRuntime } from "@/steam";
-
-import { DC } from "./core/constants";
-import { deepmergeAll } from "@/utility/deepmerge";
+/* eslint-disable sort-imports */
 import { DEV } from "@/env";
-import { SpeedrunMilestones } from "./core/speedrun";
+import { ElectronRuntime, SteamRuntime } from "@/steam";
 import { Cloud } from "./core/storage";
-import { supportedBrowsers } from "./supported-browsers";
-
+import { DC } from "./core/constants";
+import { SpeedrunMilestones } from "./core/speedrun";
+import { deepmergeAll } from "@/utility/deepmerge";
 import Payments from "./core/payments";
+import { supportedBrowsers } from "./supported-browsers";
+/* eslint-enable sort-imports */
 
 if (GlobalErrorHandler.handled) {
   throw new Error("Initialization failed");

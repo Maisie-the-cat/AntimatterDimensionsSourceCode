@@ -1,19 +1,21 @@
-import { finalSigil } from "./navigation-sigils/final-sigil";
-import { galaxyIcon } from "./navigation-sigils/galaxy-icon";
+/* eslint-disable sort-imports */
 import { alchemyResources } from "./alchemy";
 import { effarigUnlocks } from "./effarig";
 import { enslaved } from "./enslaved";
 import { pelleGalaxyGeneratorUpgrades } from "./galaxy-generator";
 import { celestialNavigation } from "./navigation";
-import { pelleUpgrades } from "./pelle-upgrades";
+import { finalSigil } from "./navigation-sigils/final-sigil";
+import { galaxyIcon } from "./navigation-sigils/galaxy-icon";
 import { perkShop } from "./perk-shop";
+import { pelleUpgrades } from "./pelle-upgrades";
+import { quotes } from "./quotes";
 import { ra } from "./ra";
 import { pelleRifts } from "./rifts";
 import { singularityMilestones } from "./singularity-milestones";
 import { pelleStrikes } from "./strikes";
 import { teresa } from "./teresa";
-import { quotes } from "./quotes";
 import { v } from "./v";
+/* eslint-enable sort-imports */
 
 export const celestials = {
   effarig: {

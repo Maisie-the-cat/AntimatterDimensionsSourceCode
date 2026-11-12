@@ -14,12 +14,12 @@ export default {
   },
   computed: {
     events() {
-      // eslint-disable-next-line no-nested-ternary
-      const sorted = this.unsortedEvents.sort((a, b) => (a.timestamp === b.timestamp
-        ? (a.thisReality === b.thisReality
-          ? a.line - b.line
-          : a.thisReality - b.thisReality)
-        : a.timestamp - b.timestamp));
+      // Create a copy before sorting to avoid mutating the original array
+      const sorted = [...this.unsortedEvents].sort((a, b) => {
+        if (a.timestamp !== b.timestamp) return a.timestamp - b.timestamp;
+        if (a.thisReality !== b.thisReality) return a.thisReality - b.thisReality;
+        return a.line - b.line;
+      });
       return this.newestFirst ? sorted.reverse() : sorted;
     },
     clearTooltip() {
